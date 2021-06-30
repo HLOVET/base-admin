@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yaraculture.resource.business.starinfo.mapper.StarInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yaraculture.resource.business.starinfo.entity.StarInfo">
+        <id column="id" property="id" />
+        <result column="account_label" property="accountLabel" />
+        <result column="nick_name" property="nickName" />
+        <result column="fans_count" property="fansCount" />
+        <result column="note_count" property="noteCount" />
+        <result column="like_count" property="likeCount" />
+        <result column="avg_like" property="avgLike" />
+        <result column="avg_collection" property="avgCollection" />
+        <result column="avg_comment" property="avgComment" />
+        <result column="content_sharp" property="contentSharp" />
+        <result column="price" property="price" />
+        <result column="account_level" property="accountLevel" />
+        <result column="person_url" property="personalUrl" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, account_label, nick_name, fans_count, note_count, like_count,
+        avg_like, avg_collection, avg_comment, content_sharp, price, account_level, person_url
+    </sql>
+
+
+    <select id="getPageList" resultType="com.yaraculture.resource.business.models.vo.StarInfoVo">
+        select
+        <include refid="Base_Column_List" />
+        from tb_star_info
+        where 1=1
+        <if test="null != req.accountLabel and '' != req.accountLabel">
+            and account_label like '%${req.accountLabel}%'
+        </if>
+        <if test="null != req.nickName and '' != req.nickName">
+            and nick_name like '%${req.nickName}%'
+        </if>
+        <if test="null != req.fansCount">
+            and fans_count >= ${req.fansCount}
+        </if>
+        <if test="null != req.contentSharp ">
+            and content_sharp = ${req.contentSharp}
+        </if>
+        <if test="null != req.price ">
+            and price = ${req.price}
+        </if>
+        <if test="null != req.accountLevel and '' != req.accountLevel">
+            and account_level = '${req.accountLevel}'
+        </if>
+    </select>
+
+</mapper>

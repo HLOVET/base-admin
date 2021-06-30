@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--解决idea thymeleaf 表达式模板报红波浪线-->
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 引入公用部分 -->
+    <script th:replace="common/head::static"></script>
+    <!-- 样式 -->
+    <link th:href="@{/resourcepool/css/starInfo.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<form class="layui-form" action="" lay-filter="starInfoForm">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">昵称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="nickName" lay-verify="required" lay-reqtext="昵称为必填项" autocomplete="off" class="layui-input">
+            </div>
+    <!--        <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>-->
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">报价(W)</label>
+            <div class="layui-input-inline">
+                <input type="text" name="price" lay-verify="required|number" lay-reqtext="报价为必填项" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">主页链接</label>
+        <div class="layui-input-block">
+            <input type="text" name="personUrl" lay-verify="required" lay-reqtext="个人主页链接是必填项" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">内容形式</label>
+        <div class="layui-input-block">
+            <select name="contentSharp" lay-filter="contentSharp">
+                <option value=""></option>
+                <option value="1">图文</option>
+                <option value="2">视频</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">粉丝数量(W)</label>
+            <div class="layui-input-inline">
+                <input type="text" name="fansCount" lay-verify="required|number" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">点赞收藏总量(W)</label>
+            <div class="layui-input-inline">
+                <input type="text" name="likeCount" lay-verify="required|number" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">笔记数量</label>
+            <div class="layui-input-inline">
+                <input type="text" name="noteCount" lay-verify="required|number" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">平均点赞数</label>
+            <div class="layui-input-inline">
+                <input type="text" name="avgLike" lay-verify="required|number" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">平均收藏数</label>
+            <div class="layui-input-inline">
+                <input type="text" name="avgCollection" lay-verify="required|number" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">平均评论数</label>
+            <div class="layui-input-inline">
+                <input type="text" name="avgComment" lay-verify="required|number" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item" pane="">
+        <label class="layui-form-label">账号标签</label>
+        <div class="layui-input-block" id="accountTypeCheckBox">
+            <input type="checkbox" name="美妆个护" lay-skin="primary" value="美妆个护" title="美妆个护">
+            <input type="checkbox" name="时尚" lay-skin="primary" value="时尚" title="时尚">
+            <input type="checkbox" name="美食" lay-skin="primary" title="美食" value="美食">
+            <input type="checkbox" name="母婴" lay-skin="primary" title="母婴" value="母婴">
+            <input type="checkbox" name="家居家装" lay-skin="primary" title="家居家装" value="家居家装">
+            <input type="checkbox" name="数码科技" lay-skin="primary" title="数码科技" value="数码科技">
+            <input type="checkbox" name="运动健身" lay-skin="primary" title="运动健身" value="运动健身">
+            <input type="checkbox" name="摄影" lay-skin="primary" title="摄影" value="摄影">
+            <input type="checkbox" name="旅行" lay-skin="primary" title="旅行" value="旅行">
+            <input type="checkbox" name="穿搭" lay-skin="primary" title="穿搭" value="穿搭">
+            <input type="checkbox" name="剧情" lay-skin="primary" title="剧情" value="剧情">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号等级</label>
+        <div class="layui-input-block">
+            <input type="radio" name="accountLevel" value="S" title="S">
+            <input type="radio" name="accountLevel" value="A" title="A">
+            <input type="radio" name="accountLevel" value="B" title="B">
+            <input type="radio" name="accountLevel" value="C" title="C">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="text-align: center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="addStarInfo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>
+
+<script>
+    layui.use(['form'], function(){
+        var form = layui.form,layer = layui.layer;
+
+        //监听提交
+        form.on('submit(addStarInfo)', function(data){
+            var arr_box = [];
+            $('#accountTypeCheckBox input[type=checkbox]:checked').each(function() {
+                arr_box.push($(this).val());
+            });
+            //账户标签数组
+            data.field.accountLabel = arr_box.join(',');
+
+            console.log('提交信息：'+JSON.stringify(data.field))
+            $.ajax({
+                url: ctx + "/starInfo/add",
+                type: "POST",
+                contentType: 'application/json',//发送格式（JSON串）
+                data: JSON.stringify(data.field),//发送参数（JSON串）
+                success: function (result) {
+                    layer.msg(result.msg, {
+                        time: 2000, //2s后自动关闭
+                        offset: '70px'
+                    });
+                    var index = parent.layer.getFrameIndex(window.name);//先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                },
+                error:function (result){
+                    layer.msg(result.msg, {
+                        time: 2000, //2s后自动关闭
+                        offset: '100px'
+                    });
+                }
+            });
+            return false;
+        });
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function(){
+            var data = form.val('starInfoForm');
+            alert(JSON.stringify(data));
+        });
+    });
+</script>
+
+
+</html>

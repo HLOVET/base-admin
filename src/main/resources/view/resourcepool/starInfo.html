@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--解决idea thymeleaf 表达式模板报红波浪线-->
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 引入公用部分 -->
+    <script th:replace="common/head::static"></script>
+    <!-- 样式 -->
+    <link th:href="@{/resourcepool/css/starInfo.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="searchDiv" id="searchDiv">
+    账号类型：
+    <div class="layui-inline">
+        <input placeholder="账号类型" class="layui-input" name="accountType" id="accountType" autocomplete="off">
+    </div>
+    昵称：
+    <div class="layui-inline">
+        <input placeholder="昵称" class="layui-input" name="nickName" id="nickName" autocomplete="off">
+    </div>
+    粉丝数(W)大于：
+    <div class="layui-inline">
+        <input placeholder="粉丝数(W)大于" class="layui-input" name="fansCount" id="fansCount" autocomplete="off">
+    </div>
+    <button class="layui-btn" id="resetBut">重置</button>
+    <button class="layui-btn" data-type="reload" id="searchBtn">搜索</button>
+</div>
+
+<table class="layui-hide" id="starInfoTable" lay-filter="starInfoTable"></table>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="addStarData" id="addStarData" >新增数据</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+</body>
+
+<!-- js -->
+<script th:src="@{/resourcepool/js/starInfo.js}"></script>
+
+</html>
