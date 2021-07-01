@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yaraculture.resource.business.project.mapper.ProjectInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yaraculture.resource.business.project.entity.ProjectInfo">
+        <id column="id" property="id" />
+        <result column="redbook_url" property="redbookUrl" />
+        <result column="group_name" property="groupName" />
+        <result column="input_money" property="inputMoney" />
+        <result column="follow_person" property="followPerson" />
+        <result column="remark" property="remark" />
+        <result column="status" property="status" />
+        <result column="puton_stars" property="putonStars" />
+        <result column="release_flag" property="releaseFlag" />
+        <result column="comments_count" property="commentsCount" />
+        <result column="like_count" property="likeCount" />
+        <result column="forward_count" property="forwardCount" />
+        <result column="name" property="name" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, redbook_url, group_name, input_money, follow_person, remark, status, puton_stars, release_flag, comments_count, like_count, forward_count
+    </sql>
+
+    <select id="getPageList" resultType="com.yaraculture.resource.business.models.vo.ProjectInfoVo">
+        select
+        <include refid="Base_Column_List" />
+        from tb_project_info
+        where 1=1
+        <if test="null != req.name and '' != req.name">
+            and name like '%${req.name}%'
+        </if>
+        <if test="null != req.groupName and '' != req.groupName">
+            and group_name like '%${req.groupName}%'
+        </if>
+        <if test="null != req.followPerson and '' != req.followPerson">
+            and follow_person like '%${req.followPerson}%'
+        </if>
+        <if test="null != req.inputMoney">
+            and input_money >= ${req.inputMoney}
+        </if>
+        <if test="null != req.status ">
+            and status = ${req.status}
+        </if>
+        <if test="null != req.releaseFlag ">
+            and release_flag = ${req.releaseFlag}
+        </if>
+        <if test="null != req.commentsCount ">
+            and comments_count >= ${req.commentsCount}
+        </if>
+        <if test="null != req.releaseFlag ">
+            and like_count >= ${req.likeCount}
+        </if>
+        <if test="null != req.forwardCount ">
+            and forward_count >= ${req.forwardCount}
+        </if>
+    </select>
+
+
+</mapper>

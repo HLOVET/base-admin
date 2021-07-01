@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<!--解决idea thymeleaf 表达式模板报红波浪线-->
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 引入公用部分 -->
+    <script th:replace="common/head::static"></script>
+    <!-- 样式 -->
+    <link th:href="@{/business/resource/css/starInfo.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="searchDiv" id="searchDiv">
+    <!-- TODO 需要考虑 xx,yy  顺序与数据库不匹配的情况 -->
+ <!--    <div class="layui-form-item" >-->
+<!--        <label class="layui-form-label">账号标签</label>-->
+<!--        <div class="layui-input-block" id="accountTypeCheckBox">-->
+<!--            <input type="checkbox" name="美妆个护" lay-skin="primary" value="美妆个护" title="美妆个护">-->
+<!--            <input type="checkbox" name="时尚" lay-skin="primary" value="时尚" title="时尚">-->
+<!--            <input type="checkbox" name="美食" lay-skin="primary" title="美食" value="美食">-->
+<!--            <input type="checkbox" name="母婴" lay-skin="primary" title="母婴" value="母婴">-->
+<!--            <input type="checkbox" name="家居家装" lay-skin="primary" title="家居家装" value="家居家装">-->
+<!--            <input type="checkbox" name="数码科技" lay-skin="primary" title="数码科技" value="数码科技">-->
+<!--            <input type="checkbox" name="运动健身" lay-skin="primary" title="运动健身" value="运动健身">-->
+<!--            <input type="checkbox" name="摄影" lay-skin="primary" title="摄影" value="摄影">-->
+<!--            <input type="checkbox" name="旅行" lay-skin="primary" title="旅行" value="旅行">-->
+<!--            <input type="checkbox" name="穿搭" lay-skin="primary" title="穿搭" value="穿搭">-->
+<!--            <input type="checkbox" name="剧情" lay-skin="primary" title="剧情" value="剧情">-->
+<!--        </div>-->
+<!--    </div>-->
+
+    账号类型：
+    <div class="layui-inline">
+        <input placeholder="账号类型" class="layui-input" name="accountType" id="accountType" autocomplete="off">
+    </div>
+    昵称：
+    <div class="layui-inline">
+        <input placeholder="昵称" class="layui-input" name="nickName" id="nickName" autocomplete="off">
+    </div>
+    粉丝数(W)大于：
+    <div class="layui-inline">
+        <input placeholder="粉丝数(W)大于" class="layui-input" name="fansCount" id="fansCount" autocomplete="off">
+    </div>
+    <button class="layui-btn" id="resetBut">重置</button>
+    <button class="layui-btn" data-type="reload" id="searchBtn">搜索</button>
+</div>
+
+<table class="layui-hide" id="starInfoTable" lay-filter="starInfoTable"></table>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm" lay-event="addStarData" id="addStarData" onclick="openAddStarWin()">新增数据</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+</body>
+
+<script>
+    //打开新增页面
+    function openAddStarWin(){
+        layer.open({
+            type: 2,
+            title: "新增资源信息",
+            shadeClose: false,
+            share: 0.01,
+            area: ['1100px', '600px'],
+            content: "../getAddPage",
+        });
+    }
+</script>
+
+<!-- js -->
+<script th:src="@{/business/resource/js/starInfo.js}"></script>
+
+</html>

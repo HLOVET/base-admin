@@ -9,7 +9,7 @@ public enum ErrorCodeEnum {
 
 
     //资源模块
-    STAR_NOT_EXSIT("STAR_NOT_EXSIT","资源不存在");
+    TARGET_NOT_EXSIT("TARGET_NOT_EXSIT","资源不存在");
 
     private String errorCode;
     private String errorMes;

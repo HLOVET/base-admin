@@ -44,6 +44,7 @@ layui.use('table', function(){
             {field:'id', title: 'id',hide:true} //id列隐藏
         ]]
         ,page:true
+        ,even:true
         ,id: 'starInfoTable'
     });
 
@@ -92,7 +93,6 @@ layui.use('table', function(){
             var accountType = $('#accountType');
             var nickName = $('#nickName');
             var fansCount = $('#fansCount');
-            console.log(accountType);
             //执行重载
             table.reload('starInfoTable', {
                 page: {
@@ -112,21 +112,9 @@ layui.use('table', function(){
         active[type] ? active[type].call(this) : '';
     });
 
-    //重载搜索条件
+    //重置搜索条件
     $('#resetBut').on('click', function(){
         $("#searchDiv :input").val("");
-    });
-
-    //打开新增页面
-    $('#addStarData').on('click', function(){
-        layer.open({
-            type: 2,
-            title: "新增资源信息",
-            shadeClose: false,
-            share: 0.01,
-            area: ['1100px', '600px'],
-            content: "../getAddPage",
-        });
     });
 
 });

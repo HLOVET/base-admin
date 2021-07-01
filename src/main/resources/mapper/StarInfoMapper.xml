@@ -16,7 +16,7 @@
         <result column="content_sharp" property="contentSharp" />
         <result column="price" property="price" />
         <result column="account_level" property="accountLevel" />
-        <result column="person_url" property="personalUrl" />
+        <result column="person_url" property="personUrl" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -50,5 +50,13 @@
             and account_level = '${req.accountLevel}'
         </if>
     </select>
+
+    <select id="getAllStarSimpleInfo" resultType="com.yaraculture.resource.business.models.vo.StarSimpleInfoVo">
+        select id as value,nick_name as title
+        from tb_star_info
+        <!-- 数据量兜底 -->
+        limit 500;
+    </select>
+
 
 </mapper>

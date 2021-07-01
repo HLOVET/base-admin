@@ -33,22 +33,22 @@ public class StarInfoController {
 
     @GetMapping("/getAddPage")
     public ModelAndView getAddPage() {
-        return new ModelAndView("resourcepool/starInfoDetail");
+        return new ModelAndView("business/resource/starInfoDetail");
     }
 
     @GetMapping("/getEditPage")
     public ModelAndView getEditPage(String dataId) {
         StarInfo starInfo =  starInfoService.getById(dataId);
         if (starInfo == null){
-            throw BizException.build(ErrorCodeEnum.STAR_NOT_EXSIT);
+            throw BizException.build(ErrorCodeEnum.TARGET_NOT_EXSIT);
         }
-        return new ModelAndView("resourcepool/starInfoDetailEdit","editStarInfo",starInfo);
+        return new ModelAndView("business/resource/starInfoDetailEdit","editStarInfo",starInfo);
     }
 
     @GetMapping("/pageList/init")
     public ModelAndView pageList() {
         Page<StarInfoVo> infoVoPage = starInfoService.getPageList(new StarInfoQueReq());
-        return new ModelAndView("resourcepool/starInfo","starInfo",infoVoPage);
+        return new ModelAndView("business/resource/starInfo","starInfo",infoVoPage);
     }
 
     @PostMapping("/pageList")

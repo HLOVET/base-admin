@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yaraculture.resource.business.projectstar.mapper.ProjectStarMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yaraculture.resource.business.project.entity.ProjectStar">
+        <id column="id" property="id" />
+        <result column="base_info" property="baseInfo" />
+        <result column="vertical_area" property="verticalArea" />
+        <result column="like_count" property="likeCount" />
+        <result column="collect_count" property="collectCount" />
+        <result column="comments_count" property="commentsCount" />
+        <result column="forward_count" property="forwardCount" />
+        <result column="belong_project" property="belongProject" />
+        <result column="star_id" property="starId" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, base_info, vertical_area, like_count, collect_count, comments_count, forward_count, belong_project,star_id
+    </sql>
+
+</mapper>

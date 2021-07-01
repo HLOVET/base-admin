@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--解决idea thymeleaf 表达式模板报红波浪线-->
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 引入公用部分 -->
+    <script th:replace="common/head::static"></script>
+    <!-- 样式 -->
+    <link th:href="@{/business/resource/css/projectInfo.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<form class="layui-form" action="" lay-filter="projectInfoForm">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">项目名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name" lay-verify="required" lay-reqtext="项目名称为必填项" autocomplete="off" class="layui-input">
+            </div>
+    <!--        <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>-->
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">项目分组</label>
+            <div class="layui-input-block">
+                <input type="text" name="groupName" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">小红书笔记链接</label>
+        <div class="layui-input-block">
+            <input type="text" name="redbookUrl" lay-verify="required" lay-reqtext="小红书笔记链接是必填项" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">投放费用(W)</label>
+        <div class="layui-input-inline">
+            <input type="text" name="inputMoney" lay-verify="required|number"  autocomplete="off" class="layui-input">
+        </div>
+        <label class="layui-form-label">跟进人</label>
+        <div class="layui-input-inline">
+            <input type="text" name="followPerson" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">项目状态</label>
+        <div class="layui-input-inline">
+            <select name="status" lay-filter="status">
+                <option value=""></option>
+                <option value="1">进行中</option>
+                <option value="2">已完结</option>
+            </select>
+        </div>
+
+        <label class="layui-form-label">发布状态</label>
+        <div class="layui-input-inline">
+            <select name="releaseFlag" lay-filter="releaseFlag">
+                <option value=""></option>
+                <option value="1">已发布</option>
+                <option value="2">未发布</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-label">总评论(W)</label>
+            <div class="layui-input-inline">
+                <input type="text" name="commentsCount" lay-verify="required|number" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">总点赞(W)</label>
+            <div class="layui-input-inline">
+                <input type="text" name="likeCount" lay-verify="required|number" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">总转发(W)</label>
+            <div class="layui-input-inline">
+                <input type="text" name="forwardCount" lay-verify="required|number" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">备注</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea" name="remark"></textarea>
+        </div>
+    </div>
+
+    <!-- 穿梭框来选择项目人员 -->
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+        <legend>投放达人选择</legend>
+    </fieldset>
+    <div id="test7" class="demo-transfer"></div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block" style="text-align: center">
+            <button type="submit" class="layui-btn" lay-submit="" lay-filter="addProjectInfo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+</body>
+
+<script th:inline="javascript">
+    var starData = [[${starInfoList}]];
+
+    layui.use(['form','transfer','util'], function(){
+        var form = layui.form
+            ,transfer = layui.transfer
+            ,layer = layui.layer;
+        //监听提交
+        form.on('submit(addProjectInfo)', function(data){
+            //项目人员存储格式 [{"value":"3","title":"苏轼"},{"value":"4","title":"李清照"}]
+            var selectPersons = transfer.getData('key123'); //获取右侧数据
+            data.field.selectPersons = selectPersons;
+
+            $.ajax({
+                url: ctx + "/projectInfo/add",
+                type: "POST",
+                contentType: 'application/json',//发送格式（JSON串）
+                data: JSON.stringify(data.field),//发送参数（JSON串）
+                success: function (result) {
+                    layer.msg(result.msg, {
+                        time: 2000, //2s后自动关闭
+                        offset: '70px'
+                    });
+                    var index = parent.layer.getFrameIndex(window.name);//先得到当前iframe层的索引
+                    parent.layer.close(index); //再执行关闭
+                },
+                error:function (result){
+                    layer.msg(result.msg, {
+                        time: 2000, //2s后自动关闭
+                        offset: '100px'
+                    });
+                }
+            });
+            return false;
+        });
+
+        //实例调用
+        transfer.render({
+            elem: '#test7'
+            ,data: starData
+            ,id: 'key123' //定义唯一索引
+        })
+
+    });
+</script>
+
+</html>

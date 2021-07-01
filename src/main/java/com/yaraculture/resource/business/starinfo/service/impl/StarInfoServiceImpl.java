@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yaraculture.resource.business.models.req.StarInfoQueReq;
 import com.yaraculture.resource.business.models.req.StarInfoReq;
 import com.yaraculture.resource.business.models.vo.StarInfoVo;
+import com.yaraculture.resource.business.models.vo.StarSimpleInfoVo;
 import com.yaraculture.resource.business.starinfo.entity.StarInfo;
 import com.yaraculture.resource.business.starinfo.mapper.StarInfoMapper;
 import com.yaraculture.resource.business.starinfo.service.StarInfoService;
@@ -12,6 +13,8 @@ import com.yaraculture.resource.util.UUIDUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -49,4 +52,8 @@ public class StarInfoServiceImpl extends ServiceImpl<StarInfoMapper, StarInfo> i
         return page;
     }
 
+    @Override
+    public List<StarSimpleInfoVo> getAllStarInfo() {
+        return starInfoMapper.getAllStarSimpleInfo();
+    }
 }

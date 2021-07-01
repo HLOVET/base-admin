@@ -4,8 +4,11 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yaraculture.resource.business.models.req.StarInfoQueReq;
 import com.yaraculture.resource.business.models.req.StarInfoReq;
 import com.yaraculture.resource.business.models.vo.StarInfoVo;
+import com.yaraculture.resource.business.models.vo.StarSimpleInfoVo;
 import com.yaraculture.resource.business.starinfo.entity.StarInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -31,5 +34,10 @@ public interface StarInfoService extends IService<StarInfo> {
      * 分页查询红人信息
      */
     Page<StarInfoVo> getPageList(StarInfoQueReq queReq);
+
+    /**
+     * 查询红人简略信息
+     */
+    List<StarSimpleInfoVo> getAllStarInfo();
 
 }

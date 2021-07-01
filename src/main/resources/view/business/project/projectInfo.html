@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--解决idea thymeleaf 表达式模板报红波浪线-->
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 引入公用部分 -->
+    <script th:replace="common/head::static"></script>
+    <!-- 样式 -->
+    <link th:href="@{/business/project/css/projectInfo.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div class="searchDiv" id="searchDiv">
+
+    项目名称：
+    <div class="layui-inline">
+        <input class="layui-input" name="name" id="name" autocomplete="off">
+    </div>
+    投放费用(>=)：
+    <div class="layui-inline">
+        <input class="layui-input" name="inputMoney" id="inputMoney" autocomplete="off">
+    </div>
+    跟进人：
+    <div class="layui-inline">
+        <input class="layui-input" name="followPerson" id="followPerson" autocomplete="off">
+    </div>
+    <div class="layui-inline">
+        <button class="layui-btn demo1" id="projectStatus">
+            项目状态
+            <i class="layui-icon layui-icon-down layui-font-12"></i>
+        </button>
+    </div>
+
+    <!-- TODO 太多的搜索条件影响布局  后续有需要再放开 -->
+<!--    总评论(>=)：-->
+<!--    <div class="layui-inline">-->
+<!--        <input class="layui-input" name="commentsCount" id="commentsCount" autocomplete="off">-->
+<!--    </div>-->
+<!--    总点赞(>=)：-->
+<!--    <div class="layui-inline">-->
+<!--        <input class="layui-input" name="likeCount" id="likeCount" autocomplete="off">-->
+<!--    </div>-->
+<!--    总转发(>=)：-->
+<!--    <div class="layui-inline">-->
+<!--        <input class="layui-input" name="forwardCount" id="forwardCount" autocomplete="off">-->
+<!--    </div>-->
+    <button class="layui-btn" id="resetBut">重置</button>
+    <button class="layui-btn" data-type="reload" id="searchBtn">搜索</button>
+</div>
+
+<table class="layui-hide" id="projectInfoTable" lay-filter="projectInfoTable"></table>
+
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm"  id="addProjectData" onclick="openAddProWin()" >新增数据</button>
+    </div>
+</script>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="updateStarInfo">更新达人信息</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+</body>
+
+<script>
+    layui.use(['dropdown', 'util', 'layer', 'table'], function(){
+        var dropdown = layui.dropdown
+            ,util = layui.util
+            ,layer = layui.layer
+            ,$ = layui.jquery;
+
+        dropdown.render({
+            elem: '#projectStatus'
+            ,data: [{
+                title: '进行中'
+                ,id: 1
+            },{
+                title: '已完结'
+                ,id: 2
+            }]
+            ,click: function(obj){
+                layer.tips('点击了：'+ obj.title, this.elem, {tips: [1, '#5FB878']})
+            }
+        });
+    });
+
+    //打开新增页面 Tips：不知道为啥写在js文件里，点击搜索之后就不能打开了
+    function openAddProWin(){
+        layer.open({
+            type: 2,
+            title: "新增资源信息",
+            shadeClose: false,
+            share: 0.01,
+            area: ['1400px', '800px'],
+            content: "/projectInfo/getAddPage",
+        });
+    }
+
+
+</script>
+<!-- js -->
+<script th:src="@{/business/project/js/projectInfo.js}"></script>
+
+</html>

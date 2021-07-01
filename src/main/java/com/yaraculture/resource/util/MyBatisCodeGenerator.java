@@ -61,7 +61,7 @@ public class MyBatisCodeGenerator {
 
     public static void main(String[] args) {
 		//注意，表名有些是区分大小写的
-		String[] tables = {"tb_star_info"};
+		String[] tables = {"tb_project_star"};
 		for (String table : tables) {
 			generateByTables(table);
 		}
