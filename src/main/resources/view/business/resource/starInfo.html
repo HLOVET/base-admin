@@ -31,15 +31,15 @@
 
     账号类型：
     <div class="layui-inline">
-        <input placeholder="账号类型" class="layui-input" name="accountType" id="accountType" autocomplete="off">
+        <input placeholder="账号标签" class="layui-input" name="accountType" id="accountType" autocomplete="off">
     </div>
     昵称：
     <div class="layui-inline">
         <input placeholder="昵称" class="layui-input" name="nickName" id="nickName" autocomplete="off">
     </div>
-    粉丝数(W)大于：
+    所属人：
     <div class="layui-inline">
-        <input placeholder="粉丝数(W)大于" class="layui-input" name="fansCount" id="fansCount" autocomplete="off">
+        <input placeholder="所属人" class="layui-input" name="ownerName" id="ownerName" autocomplete="off">
     </div>
     <button class="layui-btn" id="resetBut">重置</button>
     <button class="layui-btn" data-type="reload" id="searchBtn">搜索</button>
@@ -50,11 +50,15 @@
 <script type="text/html" id="toolbarDemo">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-sm" lay-event="addStarData" id="addStarData" onclick="openAddStarWin()">新增数据</button>
+        <button class="layui-btn layui-btn-warm" id="batchUpload" title="文件导入注意事项：1.文件名要具有唯一性 2.最多导入100行 3.达人昵称作为唯一性标准，同一文件不能存在两个相同名称数据，已存在的昵称不能重复导入"
+                lay-data="{url: '/starInfo/importFile', accept: 'file'}">批量新增数据</button>
+
     </div>
 </script>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+<!--    先隐藏删除入口 -->
+<!--    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
 </script>
 
 </body>

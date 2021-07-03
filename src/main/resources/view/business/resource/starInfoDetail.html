@@ -20,7 +20,7 @@
     <!--        <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>-->
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">报价(W)</label>
+            <label class="layui-form-label">报价</label>
             <div class="layui-input-inline">
                 <input type="text" name="price" lay-verify="required|number" lay-reqtext="报价为必填项" autocomplete="off" class="layui-input">
             </div>
@@ -36,24 +36,30 @@
 
     <div class="layui-form-item">
         <label class="layui-form-label">内容形式</label>
-        <div class="layui-input-block">
+        <div class="layui-inline">
             <select name="contentSharp" lay-filter="contentSharp">
                 <option value=""></option>
                 <option value="1">图文</option>
                 <option value="2">视频</option>
             </select>
         </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">所属人</label>
+            <div class="layui-input-inline">
+                <input type="text" name="ownerName" lay-verify="required" autocomplete="off" class="layui-input">
+            </div>
+        </div>
     </div>
 
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">粉丝数量(W)</label>
+            <label class="layui-form-label">粉丝数量</label>
             <div class="layui-input-inline">
                 <input type="text" name="fansCount" lay-verify="required|number" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">点赞收藏总量(W)</label>
+            <label class="layui-form-label">点赞收藏总量</label>
             <div class="layui-input-inline">
                 <input type="text" name="likeCount" lay-verify="required|number" autocomplete="off" class="layui-input">
             </div>
@@ -61,7 +67,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">笔记数量</label>
             <div class="layui-input-inline">
-                <input type="text" name="noteCount" lay-verify="required|number" autocomplete="off" class="layui-input">
+                <input type="text" name="noteCount" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -69,19 +75,19 @@
         <div class="layui-inline">
             <label class="layui-form-label">平均点赞数</label>
             <div class="layui-input-inline">
-                <input type="text" name="avgLike" lay-verify="required|number" autocomplete="off" class="layui-input">
+                <input type="text" name="avgLike" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">平均收藏数</label>
             <div class="layui-input-inline">
-                <input type="text" name="avgCollection" lay-verify="required|number" autocomplete="off" class="layui-input">
+                <input type="text" name="avgCollection" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">平均评论数</label>
             <div class="layui-input-inline">
-                <input type="text" name="avgComment" lay-verify="required|number" autocomplete="off" class="layui-input">
+                <input type="text" name="avgComment" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -131,28 +137,32 @@
             $('#accountTypeCheckBox input[type=checkbox]:checked').each(function() {
                 arr_box.push($(this).val());
             });
+            if (arr_box.length==0 || arr_box.length>2){
+                layer.msg('标签至多选择两项或最少选择一项哦！');
+                return false;
+            }
+
             //账户标签数组
             data.field.accountLabel = arr_box.join(',');
 
-            console.log('提交信息：'+JSON.stringify(data.field))
             $.ajax({
                 url: ctx + "/starInfo/add",
                 type: "POST",
                 contentType: 'application/json',//发送格式（JSON串）
                 data: JSON.stringify(data.field),//发送参数（JSON串）
                 success: function (result) {
-                    layer.msg(result.msg, {
-                        time: 2000, //2s后自动关闭
-                        offset: '70px'
-                    });
+                    console.log('success==='+JSON.stringify(result));
+                    //失败时给提升
+                    if(!result.success){
+                        layer.msg('添加失败！'+result.msg, {
+                            time: 2000, //2s后自动关闭
+                            offset: '70px'
+                        });
+                        return;
+                    }
+
                     var index = parent.layer.getFrameIndex(window.name);//先得到当前iframe层的索引
                     parent.layer.close(index); //再执行关闭
-                },
-                error:function (result){
-                    layer.msg(result.msg, {
-                        time: 2000, //2s后自动关闭
-                        offset: '100px'
-                    });
                 }
             });
             return false;

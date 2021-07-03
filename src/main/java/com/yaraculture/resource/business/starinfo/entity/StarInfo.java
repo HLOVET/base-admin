@@ -28,7 +28,7 @@ public class StarInfo implements Serializable {
     private String accountLabel;
 
     /**
-     * 昵称
+     * 达人昵称
      */
     private String nickName;
 
@@ -81,5 +81,10 @@ public class StarInfo implements Serializable {
      * 个人主页链接
      */
     private String personUrl;
+
+    /**
+     * 所属人员
+     */
+    private String ownerName;
 
 }

@@ -88,11 +88,12 @@ public class ProjectInfoController {
         return Result.of(true);
     }
 
-    @DeleteMapping(value = "/delete/{id}")
-    public Result<Boolean> updateInfo(@PathVariable("id") String id) {
-        projectInfoService.delete(id);
-        return Result.of(true);
-    }
+//TODO  暂时不开放删除功能 后面权限粒度做的细了再考虑
+//    @DeleteMapping(value = "/delete/{id}")
+//    public Result<Boolean> updateInfo(@PathVariable("id") String id) {
+//        projectInfoService.delete(id);
+//        return Result.of(true);
+//    }
 
 
 

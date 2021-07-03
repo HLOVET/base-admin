@@ -27,17 +27,11 @@
         </div>
     </div>
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">小红书笔记链接</label>
-        <div class="layui-input-block">
-            <input type="text" name="redbookUrl" lay-verify="required" lay-reqtext="小红书笔记链接是必填项" autocomplete="off" class="layui-input">
-        </div>
-    </div>
 
     <div class="layui-form-item">
         <label class="layui-form-label">投放费用(W)</label>
         <div class="layui-input-inline">
-            <input type="text" name="inputMoney" lay-verify="required|number"  autocomplete="off" class="layui-input">
+            <input type="text" name="inputMoney" autocomplete="off" class="layui-input">
         </div>
         <label class="layui-form-label">跟进人</label>
         <div class="layui-input-inline">
@@ -69,19 +63,19 @@
         <div class="layui-inline">
             <label class="layui-form-label">总评论(W)</label>
             <div class="layui-input-inline">
-                <input type="text" name="commentsCount" lay-verify="required|number" autocomplete="off" class="layui-input">
+                <input type="text" name="commentsCount" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">总点赞(W)</label>
             <div class="layui-input-inline">
-                <input type="text" name="likeCount" lay-verify="required|number" autocomplete="off" class="layui-input">
+                <input type="text" name="likeCount" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">总转发(W)</label>
             <div class="layui-input-inline">
-                <input type="text" name="forwardCount" lay-verify="required|number" autocomplete="off" class="layui-input">
+                <input type="text" name="forwardCount" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -135,10 +129,7 @@
                     parent.layer.close(index); //再执行关闭
                 },
                 error:function (result){
-                    layer.msg(result.msg, {
-                        time: 2000, //2s后自动关闭
-                        offset: '100px'
-                    });
+                    layer.msg(result.msg);
                 }
             });
             return false;

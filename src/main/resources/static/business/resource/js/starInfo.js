@@ -3,6 +3,7 @@
  */
 layui.use('table', function(){
     var table = layui.table;
+    var upload = layui.upload;
 
     //所获得的 tableIns 即为当前容器的实例
     var tableIns = table.render({
@@ -28,18 +29,19 @@ layui.use('table', function(){
         }]
         ,title: '红人数据表'
         ,cols: [[
-            {field:'nickName', title: '昵称',fixed: 'left', minWidth: 165} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+            {field:'nickName', title: '达人昵称',fixed: 'left', minWidth: 165} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+        ,{field:'personUrl', title: '个人主页', templet: '<div><a href="{{d.personUrl}}" target="_blank" class="layui-table-link">{{d.personUrl}}</a></div>' }
         ,{field:'accountLabel',  title: '标签'}
-        ,{field:'fansCount',  title: '粉丝数量(W)', sort: true}
+        ,{field:'fansCount',  title: '粉丝数量', sort: true}
         ,{field:'noteCount', title: '笔记数量'}
-        ,{field:'likeCount', title: '点赞收藏总量(W)', sort: true, minWidth: 170}
-        ,{field:'avgLike', title: '点赞平均数', sort: true}
-        ,{field:'avgCollection', title: '收藏平均数',sort: true}
-        ,{field:'avgComment', title: '评论平均数', sort: true}
+        ,{field:'likeCount', title: '点赞收藏总量', sort: true, minWidth: 170}
+        ,{field:'avgLike', title: '平均点赞', sort: true}
+        ,{field:'avgCollection', title: '平均收藏',sort: true}
+        ,{field:'avgComment', title: '平均评论', sort: true}
         ,{field:'contentSharp', title: '内容形式'}
-        ,{field:'price', title: '报价(W)', sort: true}
+        ,{field:'price', title: '报价', sort: true}
         ,{field:'accountLevel', title: '账号等级'}
-        ,{field:'personUrl', title: '个人主页'}
+        ,{field:'ownerName', title: '所属人'}
         ,{fixed: 'right', title:'操作', toolbar: '#barDemo'},
             {field:'id', title: 'id',hide:true} //id列隐藏
         ]]
@@ -92,7 +94,7 @@ layui.use('table', function(){
         reload: function(){
             var accountType = $('#accountType');
             var nickName = $('#nickName');
-            var fansCount = $('#fansCount');
+            var ownerName = $('#ownerName');
             //执行重载
             table.reload('starInfoTable', {
                 page: {
@@ -101,7 +103,7 @@ layui.use('table', function(){
                 ,where: {
                     accountLabel: accountType.val(),
                     nickName: nickName.val(),
-                    fansCount: fansCount.val()
+                    ownerName: ownerName.val()
                 }
             });
         }
@@ -115,6 +117,26 @@ layui.use('table', function(){
     //重置搜索条件
     $('#resetBut').on('click', function(){
         $("#searchDiv :input").val("");
+    });
+
+    //批量上传执行实例
+    var uploadInst = upload.render({
+        elem: '#batchUpload' //绑定元素
+        ,url: '/starInfo/importFile' //上传接口
+        ,done: function(res){
+            console.log('import suss='+JSON.stringify(res));
+            if (res.success){
+                layer.msg("导入成功！");
+            }else {
+                layer.msg("导入失败~~，"+res.msg);
+            }
+            //上传完毕回调
+        }
+        ,error: function(){
+            layer.msg("导入失败了.. 0.0");
+            console.log('import error='+JSON.stringify(res));
+            //请求异常回调
+        }
     });
 
 });

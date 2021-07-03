@@ -35,8 +35,8 @@ public class Result<T> implements Serializable {
         return new Result<>(data,true);
     }
 
-    public static <T> Result<T> of(String errorCode,String msg) {
-        return new Result<>(errorCode,msg);
+    public static <T> Result<T> error(String errorCode,String msg) {
+        return new Result<>(false,errorCode,msg);
     }
 
     public static <T> Result<T> of(T data, boolean flag) {
@@ -47,7 +47,8 @@ public class Result<T> implements Serializable {
         return new Result<>(data, flag, msg);
     }
 
-    private Result(String errorCode,String msg) {
+    private Result(boolean flag,String errorCode,String msg) {
+        this.success = flag;
         this.errorCode = errorCode;
         this.msg= msg;
     }

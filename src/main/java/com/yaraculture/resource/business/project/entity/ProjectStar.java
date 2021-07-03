@@ -35,22 +35,22 @@ public class ProjectStar implements Serializable {
     /**
      * 点赞
      */
-    private Integer likeCount;
+    private Integer likeCount = 0;
 
     /**
      * 收藏
      */
-    private Integer collectCount;
+    private Integer collectCount = 0;
 
     /**
      * 评论
      */
-    private Integer commentsCount;
+    private Integer disCounts = 0;
 
     /**
      * 收藏
      */
-    private Integer forwardCount;
+    private Integer forwardCount = 0;
 
     /**
      * 所属项目（tb_project_info.id）

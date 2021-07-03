@@ -7,6 +7,7 @@ import com.yaraculture.resource.business.models.vo.StarInfoVo;
 import com.yaraculture.resource.business.models.vo.StarSimpleInfoVo;
 import com.yaraculture.resource.business.starinfo.entity.StarInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.apache.commons.csv.CSVRecord;
 
 import java.util.List;
 
@@ -39,5 +40,11 @@ public interface StarInfoService extends IService<StarInfo> {
      * 查询红人简略信息
      */
     List<StarSimpleInfoVo> getAllStarInfo();
+
+    /**
+     * 批量导入
+     */
+    boolean batchImport( List<CSVRecord> recordList);
+
 
 }

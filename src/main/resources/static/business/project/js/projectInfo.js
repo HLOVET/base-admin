@@ -34,7 +34,7 @@ layui.use('table', function(){
             ,{field:'followPerson', title: '跟进人'}
             ,{field:'status', title: '项目状态'}
             ,{field:'putonStars', title: '投放达人'}
-            ,{field:'releaseFlag', title: '发布状态'}
+            // ,{field:'releaseFlag', title: '发布状态'}
             ,{field:'commentsCount', title: '总评论(W)',sort: true}
             ,{field:'likeCount', title: '总点赞(W)', sort: true}
             ,{field:'forwardCount', title: '总转发(W)',sort: true}
@@ -53,13 +53,6 @@ layui.use('table', function(){
                     $(this).text('进行中');
                 } else if ($(this).text() == '2') {
                     $(this).text('已完结');
-                }
-            });
-            $("[data-field='releaseFlag']").children().each(function () {
-                if ($(this).text() == '1') {
-                    $(this).text('已发布');
-                } else if ($(this).text() == '2') {
-                    $(this).text('未发布');
                 }
             });
         }
@@ -105,12 +98,11 @@ layui.use('table', function(){
             //项目关联的人员  来更新数据
             layer.open({
                 type: 2,
-                title: "编辑项目信息",
+                title: "更新人员信息",
                 shadeClose: false,
                 share: 0.01,
-                area: ['1100px', '800px'],
-                //TODO 带着达人信息跳转  在页面上直接编辑
-                content: "/projectInfo/getEditPage?dataId=" + data.id,
+                area: ['1000px', '400px'],
+                content: "/starProject/listByProject/" + data.id,
             });
         }
     });

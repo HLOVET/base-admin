@@ -22,18 +22,7 @@ public class StarInfoQueReq extends PageCondition {
     private Integer fansCount;
 
     /**
-     * 内容形式(1-图文  2-视频)
+     * 所属人员
      */
-    private Integer contentSharp;
-
-    /**
-     * 报价(“万”为单位)
-     */
-    private Integer price;
-
-    /**
-     * 分为 S A B C
-     */
-    private String accountLevel;
-
+    private String ownerName;
 }

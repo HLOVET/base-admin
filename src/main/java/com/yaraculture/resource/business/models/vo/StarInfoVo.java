@@ -71,4 +71,9 @@ public class StarInfoVo {
      */
     private String personUrl;
 
+    /**
+     * 所属人员
+     */
+    private String ownerName;
+
 }

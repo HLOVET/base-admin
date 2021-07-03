@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ProjectStarInfoVo {
 
-    private Integer id;
+    private String id;
     /**
      * 达人基本信息
      */
@@ -31,10 +31,10 @@ public class ProjectStarInfoVo {
     /**
      * 评论
      */
-    private Integer commentsCount;
+    private Integer disCounts;
 
     /**
-     * 收藏
+     * 转发
      */
     private Integer forwardCount;
 

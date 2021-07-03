@@ -28,7 +28,7 @@
     <!--        <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>-->
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">报价(W)</label>
+            <label class="layui-form-label">报价</label>
             <div class="layui-input-inline">
                 <input th:value="${editStarInfo.price}" type="text" name="price" lay-verify="required|number" lay-reqtext="报价为必填项" autocomplete="off" class="layui-input">
             </div>
@@ -55,13 +55,13 @@
 
     <div class="layui-form-item">
         <div class="layui-inline">
-            <label class="layui-form-label">粉丝数量(W)</label>
+            <label class="layui-form-label">粉丝数量</label>
             <div class="layui-input-inline">
                 <input th:value="${editStarInfo.fansCount}" type="text" name="fansCount" lay-verify="required|number" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">点赞收藏总量(W)</label>
+            <label class="layui-form-label">点赞收藏总量</label>
             <div class="layui-input-inline">
                 <input th:value="${editStarInfo.likeCount}" type="text" name="likeCount" lay-verify="required|number" autocomplete="off" class="layui-input">
             </div>
@@ -69,7 +69,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">笔记数量</label>
             <div class="layui-input-inline">
-                <input th:value="${editStarInfo.noteCount}" type="text" name="noteCount" lay-verify="required|number" autocomplete="off" class="layui-input">
+                <input th:value="${editStarInfo.noteCount}" type="text" name="noteCount" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -77,19 +77,19 @@
         <div class="layui-inline">
             <label class="layui-form-label">平均点赞数</label>
             <div class="layui-input-inline">
-                <input th:value="${editStarInfo.avgLike}" type="text" name="avgLike" lay-verify="required|number" autocomplete="off" class="layui-input">
+                <input th:value="${editStarInfo.avgLike}" type="text" name="avgLike" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">平均收藏数</label>
             <div class="layui-input-inline">
-                <input th:value="${editStarInfo.avgCollection}" type="text" name="avgCollection" lay-verify="required|number" autocomplete="off" class="layui-input">
+                <input th:value="${editStarInfo.avgCollection}" type="text" name="avgCollection" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label">平均评论数</label>
             <div class="layui-input-inline">
-                <input th:value="${editStarInfo.avgComment}" type="text" name="avgComment" lay-verify="required|number" autocomplete="off" class="layui-input">
+                <input th:value="${editStarInfo.avgComment}" type="text" name="avgComment" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>

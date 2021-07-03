@@ -69,5 +69,8 @@ public class StarInfoReq {
      * 个人主页链接
      */
     private String personUrl;
-
+    /**
+     * 所属人员
+     */
+    private String ownerName;
 }

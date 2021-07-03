@@ -3,6 +3,7 @@ package com.yaraculture.resource.common.exception;
 import com.yaraculture.resource.common.pojo.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,9 +19,9 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = BizException.class)
-    public Result bizExceptionHandler(HttpServletRequest req, BizException e){
+    public Result<Object> bizExceptionHandler(HttpServletRequest req, BizException e){
         log.error("发生业务异常！原因是：{}",e.getErrorMsg());
-        return Result.of(e.getErrorCode(),e.getErrorMsg());
+        return Result.error(e.getErrorCode(),e.getErrorMsg());
     }
 
     /**
@@ -30,9 +31,10 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = Exception.class)
-    public Result otherExceptionHandler(HttpServletRequest req, BizException e){
+    @ResponseStatus
+    public Result<Object> otherExceptionHandler(HttpServletRequest req, BizException e){
         log.error("发生业务异常！原因是：{}",e.getErrorMsg());
-        return Result.of("0001","系统错误,请联系管理员");
+        return Result.error("0001","系统错误,请联系管理员");
     }
 
 

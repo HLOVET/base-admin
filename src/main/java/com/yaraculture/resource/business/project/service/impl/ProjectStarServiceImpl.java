@@ -1,7 +1,9 @@
 package com.yaraculture.resource.business.project.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yaraculture.resource.business.models.vo.ProjectStarInfoVo;
 import com.yaraculture.resource.business.models.vo.StarSimpleInfoVo;
 import com.yaraculture.resource.business.project.entity.ProjectStar;
 import com.yaraculture.resource.business.project.mapper.ProjectStarMapper;
@@ -15,7 +17,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author xieyangli
@@ -43,7 +45,26 @@ public class ProjectStarServiceImpl extends ServiceImpl<ProjectStarMapper, Proje
     @Override
     public boolean batchDeleteWithProjectId(String projectId) {
         QueryWrapper<ProjectStar> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("belong_project",projectId);
+        queryWrapper.eq("belong_project", projectId);
         return this.remove(queryWrapper);
+    }
+
+    @Override
+    public List<ProjectStarInfoVo> getStarsByProject(String projectId) {
+        return projectStarMapper.getStarsByProject(projectId);
+    }
+
+    @Override
+    public boolean updateStarInfo(ProjectStarInfoVo req) {
+        UpdateWrapper<ProjectStar> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.set(req.getBaseInfo() != null, "base_info", req.getBaseInfo())
+                .set(req.getVerticalArea() != null, "vertical_area", req.getVerticalArea())
+                .set(req.getCollectCount() != null, "collect_count", req.getCollectCount())
+                .set(req.getLikeCount() != null, "like_count", req.getLikeCount())
+                .set(req.getDisCounts() != null, "dis_counts", req.getDisCounts())
+                .set(req.getForwardCount() != null, "forward_count", req.getForwardCount())
+                .eq("id", req.getId());
+
+        return this.update(updateWrapper);
     }
 }
