@@ -39,7 +39,7 @@ public interface StarInfoService extends IService<StarInfo> {
     /**
      * 查询红人简略信息
      */
-    List<StarSimpleInfoVo> getAllStarInfo();
+    List<StarSimpleInfoVo> getAllStarInfo(String nickName);
 
     /**
      * 批量导入

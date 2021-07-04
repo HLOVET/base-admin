@@ -69,13 +69,17 @@ CREATE TABLE `sys_menu`  (
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
+INSERT INTO `sys_menu` VALUES ('35cb950cebb04bb18bb1d8b742a02005', '资源管理', '/starInfo/pageList/init', '', 1, '2019-09-11 18:05:21', '2021-06-29 16:21:11');
 INSERT INTO `sys_menu` VALUES ('35cb950cebb04bb18bb1d8b742a02xaa', '权限管理', '/sys/sysAuthority/authority', '35cb950cebb04bb18bb1d8b742a02xxx', 1, '2019-09-10 10:08:58', '2019-09-10 10:08:58');
 INSERT INTO `sys_menu` VALUES ('35cb950cebb04bb18bb1d8b742a02xcc', '菜单管理', '/sys/sysMenu/menu', '35cb950cebb04bb18bb1d8b742a02xxx', 2, '2019-09-10 10:08:58', '2019-09-10 10:08:58');
 INSERT INTO `sys_menu` VALUES ('35cb950cebb04bb18bb1d8b742a02xxx', '系统管理', '/sys', '', 0, '2019-09-10 10:08:58', '2019-09-10 10:08:58');
 INSERT INTO `sys_menu` VALUES ('35cb950cebb04bb18bb1d8b742a02xzz', '用户管理', '/sys/sysUser/user', '35cb950cebb04bb18bb1d8b742a02xxx', 3, '2019-09-10 10:08:58', '2019-09-10 10:08:58');
 INSERT INTO `sys_menu` VALUES ('74315e162f524a4d88aa931f02416f26', '实时监控', '/monitor', '35cb950cebb04bb18bb1d8b742a02xxx', 4, '2020-06-10 15:07:07', '2020-06-10 15:07:07');
+INSERT INTO `sys_menu` VALUES ('78fb15a19e894777afbc239d574da423', '项目管理', '/projectInfo/list/init', '', 2, '2020-10-16 13:04:41', '2021-07-01 16:21:07');
 INSERT INTO `sys_menu` VALUES ('914aa22c78af4327822061f3eada4067', '实时日志', '/logging', '35cb950cebb04bb18bb1d8b742a02xxx', 5, '2019-09-11 11:19:52', '2019-09-11 11:19:52');
 INSERT INTO `sys_menu` VALUES ('bcf17dc0ce304f0ba02d64ce21ddb4f9', '系统设置', '/sys/sysSetting/setting', '35cb950cebb04bb18bb1d8b742a02xxx', 0, '2019-09-17 10:46:11', '2019-09-17 10:46:11');
+
+
 -- ----------------------------
 -- Table structure for sys_setting
 -- ----------------------------
@@ -189,6 +193,68 @@ CREATE TABLE `sys_user_menu`  (
   `update_time` datetime NOT NULL COMMENT '修改时间',
   PRIMARY KEY (`user_menu_id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户菜单表' ROW_FORMAT = Compact;
+-- ----------------------------
+-- Table structure for tb_project_info
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_project_info`;
+CREATE TABLE `tb_project_info`  (
+                                    `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+                                    `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目名称',
+                                    `redbook_url` varchar(2048) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '小红书笔记链接',
+                                    `group_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '项目分组',
+                                    `input_money` float NULL DEFAULT NULL COMMENT '投放费用',
+                                    `follow_person` varchar(2048) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '跟进人',
+                                    `remark` varchar(2048) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注',
+                                    `status` int NULL DEFAULT NULL COMMENT '状态：1-进行中   2-已完结',
+                                    `puton_stars` varchar(2048) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '投放达人id列表(tb_project_star)，  以\",\"分割',
+                                    `release_flag` int NULL DEFAULT NULL COMMENT '1-已发布   2-未发布',
+                                    `comments_count` int NULL DEFAULT NULL COMMENT '总评论',
+                                    `like_count` int NULL DEFAULT NULL COMMENT '总点赞',
+                                    `forward_count` int NULL DEFAULT NULL COMMENT '总转发',
+                                    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tb_project_star
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_project_star`;
+CREATE TABLE `tb_project_star`  (
+                                    `id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+                                    `base_info` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '达人基本信息',
+                                    `vertical_area` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '垂直领域',
+                                    `like_count` int NULL DEFAULT NULL COMMENT '点赞数',
+                                    `collect_count` int NULL DEFAULT NULL COMMENT '收藏数',
+                                    `dis_counts` int NULL DEFAULT NULL COMMENT '评论数',
+                                    `forward_count` int NULL DEFAULT NULL COMMENT '转发数',
+                                    `belong_project` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属项目（tb_project_info.id）',
+                                    `star_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '达人ID',
+                                    `note_url` varchar(2048) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '笔记链接',
+                                    PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for tb_star_info
+-- ----------------------------
+DROP TABLE IF EXISTS `tb_star_info`;
+CREATE TABLE `tb_star_info`  (
+                                 `id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+                                 `nick_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '达人昵称',
+                                 `person_url` varchar(4096) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '个人主页链接',
+                                 `account_label` varchar(4096) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '账户标签 数组形式',
+                                 `fans_count` int NULL DEFAULT NULL COMMENT '粉丝数量(以“万”为单位)',
+                                 `note_count` int NULL DEFAULT NULL COMMENT '笔记数量',
+                                 `like_count` int NULL DEFAULT NULL COMMENT '点赞收藏总量',
+                                 `avg_like` int NULL DEFAULT NULL COMMENT '平均点赞',
+                                 `avg_collection` int NULL DEFAULT NULL COMMENT '平均收藏',
+                                 `avg_comment` int NULL DEFAULT NULL COMMENT '平均评论',
+                                 `content_sharp` int NULL DEFAULT NULL COMMENT '内容形式(1-图文  2-视频)',
+                                 `price` int NULL DEFAULT NULL COMMENT '报价',
+                                 `account_level` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分为 S A B C',
+                                 `owner_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属人员',
+                                 PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- ----------------------------
 -- Records of sys_user_menu

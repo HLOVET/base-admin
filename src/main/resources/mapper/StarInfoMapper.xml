@@ -46,8 +46,9 @@
     <select id="getAllStarSimpleInfo" resultType="com.yaraculture.resource.business.models.vo.StarSimpleInfoVo">
         select id as value,nick_name as title
         from tb_star_info
+        where nick_name like '%${nickName}%'
         <!-- 数据量兜底 -->
-        limit 500;
+        limit 20;
     </select>
 
 

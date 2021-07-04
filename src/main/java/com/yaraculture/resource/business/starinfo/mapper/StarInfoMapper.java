@@ -27,8 +27,8 @@ public interface StarInfoMapper extends BaseMapper<StarInfo> {
     Page<StarInfoVo> getPageList(Page<StarInfoVo> page, @Param("req") StarInfoQueReq queReq);
 
     /**
-     * 获取全部红人的简略信息
+     * 获取红人的简略信息
      */
-    List<StarSimpleInfoVo> getAllStarSimpleInfo();
+    List<StarSimpleInfoVo> getAllStarSimpleInfo(@Param("nickName") String nickName);
 
 }

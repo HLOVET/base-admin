@@ -15,6 +15,10 @@ public class Result<T> implements Serializable {
      */
     private T data;
     /**
+     * 通信状态(遗留字段)
+     */
+    private boolean flag = true;
+    /**
      * 通信状态
      */
     private boolean success = true;
@@ -49,6 +53,7 @@ public class Result<T> implements Serializable {
 
     private Result(boolean flag,String errorCode,String msg) {
         this.success = flag;
+        this.flag = flag;
         this.errorCode = errorCode;
         this.msg= msg;
     }
@@ -56,11 +61,13 @@ public class Result<T> implements Serializable {
     private Result(T data, boolean flag) {
         this.data = data;
         this.success = flag;
+        this.flag = flag;
     }
 
     private Result(T data, boolean flag, String msg) {
         this.data = data;
         this.success = flag;
+        this.flag = flag;
         this.msg = msg;
     }
 

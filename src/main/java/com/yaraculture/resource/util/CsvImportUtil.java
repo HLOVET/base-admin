@@ -1,15 +1,15 @@
 package com.yaraculture.resource.util;
 
 import com.yaraculture.resource.common.exception.BizException;
-import com.yaraculture.resource.common.exception.ErrorCodeEnum;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
-import java.net.URL;
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,7 +21,7 @@ import static com.yaraculture.resource.common.exception.ErrorCodeEnum.IMPORT_FIL
 public class CsvImportUtil {
 
     //上传文件的路径
-    private final static URL PATH = Thread.currentThread().getContextClassLoader().getResource("");
+    private final static String PATH = "C://importDir//";
 
     /**
      * @return File  一般文件类型
@@ -31,7 +31,7 @@ public class CsvImportUtil {
     public static File uploadFile(MultipartFile multipartFile) {
         try {
             // 获 取上传 路径
-            String path = PATH.getPath()+ multipartFile.getOriginalFilename();
+            String path = PATH + multipartFile.getOriginalFilename();
             // 通过将给定的路径名字符串转换为抽象路径名来创建新的 File实例
             File file = new File(path);
             // 此抽象路径名表示的文件或目录是否存在

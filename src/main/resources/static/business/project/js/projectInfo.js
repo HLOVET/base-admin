@@ -28,7 +28,6 @@ layui.use('table', function(){
         ,title: '项目数据表'
         ,cols: [[
             {field:'name', title: '项目名称',fixed: 'left', minWidth: 165} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-            ,{field:'redbookUrl',  title: '小红书笔记链接'}
             ,{field:'groupName',  title: '项目分组'}
             ,{field:'inputMoney', title: '投放费用(W)',sort: true}
             ,{field:'followPerson', title: '跟进人'}

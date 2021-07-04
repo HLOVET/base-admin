@@ -61,6 +61,10 @@ public class ProjectStar implements Serializable {
      * 达人Id
      */
     private String starId;
+    /**
+     * 笔记链接
+     */
+    private String noteUrl;
 
 
 }

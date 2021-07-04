@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--解决idea thymeleaf 表达式模板报红波浪线-->
+<!--suppress ALL -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 引入公用部分 -->
+    <script th:replace="common/head::static"></script>
+    <!-- 样式 -->
+    <link th:href="@{/business/resource/css/starInfo.css}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <div id="showSimpleInfo">
+        <table class="layui-table" lay-filter="starSimpleInfoTable">
+            <thead>
+            <tr>
+                <th lay-data="{type:'checkbox'}"></th>
+                <th lay-data="{field:'title' title: '达人昵称',fixed: 'left', minWidth: 165}">达人昵称</th>
+                <th lay-data="{field:'value', hide:true}" >value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 遍历集合，如果被遍历的变量 starList 为 null 或者不存在，则不会进行遍历，也不报错-->
+            <tr th:each="starInfo : ${starSimpleInfoList}">
+                <td><input type="checkbox" name="selectPerson"  th:title="${starInfo.title}" th:value="${starInfo.value}" lay-skin="primary"></td>
+                <td th:text="${starInfo.title}"></td>
+                <td th:text="${starInfo.value}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -14,6 +14,7 @@
     <thead>
         <tr>
             <th lay-data="{field:'baseInfo',edit: 'text', title: '达人基本信息',fixed: 'left', minWidth: 165}">达人基本信息</th>
+            <th lay-data="{field:'noteUrl',edit: 'text'}">笔记信息</th>
             <th lay-data="{field:'verticalArea',edit: 'text'}">垂直领域</th>
             <th lay-data="{field:'likeCount',edit: 'text'}">点赞量</th>
             <th lay-data="{field:'collectCount',edit: 'text'}">收藏量</th>
@@ -27,6 +28,7 @@
         <tr th:each="starInfo : ${starList}">
             <!-- 将用户的主键 uId 存在在 name 属性中-->
             <td th:text="${starInfo.baseInfo}"></td>
+            <td th:text="${starInfo.noteUrl}"></td>
             <td th:text="${starInfo.verticalArea}"></td>
             <td th:text="${starInfo.likeCount}"></td>
             <td th:text="${starInfo.collectCount}"></td>

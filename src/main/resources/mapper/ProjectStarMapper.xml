@@ -13,11 +13,12 @@
         <result column="forward_count" property="forwardCount" />
         <result column="belong_project" property="belongProject" />
         <result column="star_id" property="starId" />
+        <result column="note_url" property="noteUrl" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, base_info, vertical_area, like_count, collect_count, dis_counts, forward_count, belong_project,star_id
+        id, base_info, vertical_area, like_count, collect_count, dis_counts, forward_count, belong_project,star_id,note_url
     </sql>
 
 

@@ -69,8 +69,8 @@ public class StarInfoServiceImpl extends ServiceImpl<StarInfoMapper, StarInfo> i
     }
 
     @Override
-    public List<StarSimpleInfoVo> getAllStarInfo() {
-        return starInfoMapper.getAllStarSimpleInfo();
+    public List<StarSimpleInfoVo> getAllStarInfo(String nickName) {
+        return starInfoMapper.getAllStarSimpleInfo(nickName);
     }
 
     @Override

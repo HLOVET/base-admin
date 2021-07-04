@@ -16,10 +16,12 @@ import com.yaraculture.resource.common.exception.ErrorCodeEnum;
 import com.yaraculture.resource.common.pojo.PageInfo;
 import com.yaraculture.resource.common.pojo.PageResult;
 import com.yaraculture.resource.common.pojo.Result;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -48,9 +50,7 @@ public class ProjectInfoController {
 
     @GetMapping("/getAddPage")
     public ModelAndView getAddPage() {
-        //复用红人资源页面及接口  供项目选中并绑定， 以后数据量超了再优化
-        List<StarSimpleInfoVo> starInfoList = starInfoService.getAllStarInfo();
-        return new ModelAndView("business/project/projectInfoDetail","starInfoList",starInfoList);
+        return new ModelAndView("business/project/projectInfoDetail");
     }
 
     @GetMapping("/getEditPage")
@@ -62,11 +62,21 @@ public class ProjectInfoController {
         ModelAndView modelAndView = new ModelAndView("business/project/projectInfoDetailEdit");
         modelAndView.addObject("projectInfo",projectInfo);
 
-        //返回人员信息，可重新绑定
-        List<StarSimpleInfoVo> starInfoList = starInfoService.getAllStarInfo();
-        modelAndView.addObject("allStarInfoList",starInfoList);
-
+//        //返回人员信息，可重新绑定
+//        List<StarSimpleInfoVo> starInfoList = starInfoService.getAllStarInfo();
+//        modelAndView.addObject("allStarInfoList",starInfoList);
         return modelAndView;
+    }
+
+    @GetMapping("/page/getSimpleStarInfo")
+    public ModelAndView getSimpleStarInfo(@RequestParam(required = false) String nickName) {
+        List<StarSimpleInfoVo> starInfoList;
+        if (StringUtils.isBlank(nickName)){
+            starInfoList =  Collections.emptyList();
+        }else {
+            starInfoList = starInfoService.getAllStarInfo(nickName);
+        }
+        return new ModelAndView("business/resource/starSimpleInfo","starSimpleInfoList",starInfoList);
     }
 
     @PostMapping("/pageList")

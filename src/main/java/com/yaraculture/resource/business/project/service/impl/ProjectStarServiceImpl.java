@@ -63,6 +63,7 @@ public class ProjectStarServiceImpl extends ServiceImpl<ProjectStarMapper, Proje
                 .set(req.getLikeCount() != null, "like_count", req.getLikeCount())
                 .set(req.getDisCounts() != null, "dis_counts", req.getDisCounts())
                 .set(req.getForwardCount() != null, "forward_count", req.getForwardCount())
+                .set(req.getNoteUrl() !=null, "note_url",req.getNoteUrl())
                 .eq("id", req.getId());
 
         return this.update(updateWrapper);

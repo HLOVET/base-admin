@@ -12,7 +12,10 @@ public class ProjectStarInfoVo {
      * 达人基本信息
      */
     private String baseInfo;
-
+    /**
+     * 笔记链接
+     */
+    private String noteUrl;
     /**
      * 垂直领域
      */

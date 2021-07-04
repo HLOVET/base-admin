@@ -30,7 +30,7 @@ layui.use('table', function(){
         ,title: '红人数据表'
         ,cols: [[
             {field:'nickName', title: '达人昵称',fixed: 'left', minWidth: 165} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-        ,{field:'personUrl', title: '个人主页', templet: '<div><a href="{{d.personUrl}}" target="_blank" class="layui-table-link">{{d.personUrl}}</a></div>' }
+        ,{field:'personUrl', title: '个人主页', templet: '<div><a href="{{d.personUrl}}" target="view_window" class="layui-table-link">{{d.personUrl}}</a></div>' }
         ,{field:'accountLabel',  title: '标签'}
         ,{field:'fansCount',  title: '粉丝数量', sort: true}
         ,{field:'noteCount', title: '笔记数量'}

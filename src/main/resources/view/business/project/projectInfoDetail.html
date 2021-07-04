@@ -6,7 +6,7 @@
     <!-- 引入公用部分 -->
     <script th:replace="common/head::static"></script>
     <!-- 样式 -->
-    <link th:href="@{/business/resource/css/projectInfo.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{/business/project/css/projectInfo.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 
@@ -87,15 +87,23 @@
         </div>
     </div>
 
-    <!-- 穿梭框来选择项目人员 -->
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
         <legend>投放达人选择</legend>
     </fieldset>
-    <div id="test7" class="demo-transfer"></div>
+    <div id="searchDiv">
+        达人名称：
+        <div class="layui-inline">
+            <input class="layui-input" name="searchName" id="searchName" autocomplete="off">
+        </div>
+        <button type="button" class="layui-btn" id="searchBtn" onclick="getSimpleStarInfo()">搜索</button>
+    </div>
+
+    <div id="starSimpleInfoDiv"></div>
 
     <div class="layui-form-item">
         <div class="layui-input-block" style="text-align: center">
-            <button type="submit" class="layui-btn" lay-submit="" lay-filter="addProjectInfo">立即提交</button>
+<!--            <button id="LAY-component-form-getval" type="button" class="layui-btn" onclick="submitProjectInfo()">立即提交</button>-->
+            <button id="LAY-component-form-getval" type="button" class="layui-btn" >立即提交</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
@@ -103,23 +111,41 @@
 </body>
 
 <script th:inline="javascript">
-    var starData = [[${starInfoList}]];
 
-    layui.use(['form','transfer','util'], function(){
-        var form = layui.form
-            ,transfer = layui.transfer
-            ,layer = layui.layer;
-        //监听提交
-        form.on('submit(addProjectInfo)', function(data){
-            //项目人员存储格式 [{"value":"3","title":"苏轼"},{"value":"4","title":"李清照"}]
-            var selectPersons = transfer.getData('key123'); //获取右侧数据
-            data.field.selectPersons = selectPersons;
+    function getSimpleStarInfo(){
+        var searchName = $('#searchName').val();
+        $.ajax({
+            url: ctx + "/projectInfo/page/getSimpleStarInfo?nickName=" + searchName,
+            type: "GET",
+            success: function (result) {
+                $("#starSimpleInfoDiv").html(result);
+            },
+            error:function (result){
+                console.log('error = '+JSON.stringify(result));
+            }
+        });
+    }
 
+    layui.use(['form'], function(){
+        var form = layui.form,layer = layui.layer;
+
+        //表单取值并提交
+        layui.$('#LAY-component-form-getval').on('click', function(){
+            var data = form.val('projectInfoForm');
+
+            var selectPerson =[];
+            $("input[name='selectPerson']:checked").each(function (index,element){
+                //{"value": "1", "title": "李白"}
+                selectPerson.push({value:$(this).val(),title:$(this).attr('title')})
+            });
+            console.log("sele = "+JSON.stringify(selectPerson));
+            data.selectPersons = selectPerson;
+            console.log("lastData = "+JSON.stringify(data));
             $.ajax({
                 url: ctx + "/projectInfo/add",
                 type: "POST",
                 contentType: 'application/json',//发送格式（JSON串）
-                data: JSON.stringify(data.field),//发送参数（JSON串）
+                data: JSON.stringify(data),//发送参数（JSON串）
                 success: function (result) {
                     layer.msg(result.msg, {
                         time: 2000, //2s后自动关闭
@@ -132,17 +158,9 @@
                     layer.msg(result.msg);
                 }
             });
-            return false;
         });
-
-        //实例调用
-        transfer.render({
-            elem: '#test7'
-            ,data: starData
-            ,id: 'key123' //定义唯一索引
-        })
-
     });
+
 </script>
 
 </html>
