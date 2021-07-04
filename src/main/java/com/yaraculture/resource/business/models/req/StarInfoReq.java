@@ -73,4 +73,8 @@ public class StarInfoReq {
      * 所属人员
      */
     private String ownerName;
+    /**
+     * 联系方式
+     */
+    private String contact;
 }

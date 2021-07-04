@@ -18,12 +18,13 @@
         <result column="account_level" property="accountLevel" />
         <result column="person_url" property="personUrl" />
         <result column="owner_name" property="ownerName" />
+        <result column="contact" property="contact" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, account_label, nick_name, fans_count, note_count, like_count,
-        avg_like, avg_collection, avg_comment, content_sharp, price, account_level, person_url, owner_name
+        avg_like, avg_collection, avg_comment, content_sharp, price, account_level, person_url, owner_name,contact
     </sql>
 
 
@@ -40,6 +41,9 @@
         </if>
         <if test="null != req.ownerName and '' != req.ownerName">
             and owner_name like '%${req.ownerName}%'
+        </if>
+        <if test="null != req.accountLevel and '' != req.accountLevel">
+            and account_level like '%${req.accountLevel}%'
         </if>
     </select>
 

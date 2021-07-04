@@ -59,9 +59,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/webjars/**",
             "/getVerifyCodeImage",
             "/error/*",
-            "/picture/login/*",
+            "/picture/login/*"
             //TODO 上线后去除
-            "/starInfo/*"
+            //"/starInfo/*"
     };
 
     @Override

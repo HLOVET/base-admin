@@ -87,4 +87,9 @@ public class StarInfo implements Serializable {
      */
     private String ownerName;
 
+    /**
+     * 联系方式
+     */
+    private String contact;
+
 }

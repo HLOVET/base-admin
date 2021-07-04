@@ -57,6 +57,13 @@ public class StarInfoController {
         return new ModelAndView("business/resource/starInfo","starInfo",infoVoPage);
     }
 
+    @GetMapping("/admin/pageList/init")
+    public ModelAndView getAdminPageList() {
+        Page<StarInfoVo> infoVoPage = starInfoService.getPageList(new StarInfoQueReq());
+        return new ModelAndView("business/resource/starInfoAdmin","starInfo",infoVoPage);
+    }
+
+
     @PostMapping("/pageList")
     public PageResult<StarInfoVo> pageList(StarInfoQueReq queReq) {
         Page<StarInfoVo> infoVoPage = starInfoService.getPageList(queReq);

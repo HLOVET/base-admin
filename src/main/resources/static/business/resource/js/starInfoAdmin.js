@@ -22,7 +22,7 @@ layui.use('table', function(){
                 dataName: 'data', //数据列表的字段名称，默认：data
             }
         ,toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
-        ,defaultToolbar: ['filter', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+        ,defaultToolbar: ['filter', 'exports', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
             title: '提示'
             ,layEvent: 'LAYTABLE_TIPS'
             ,icon: 'layui-icon-tips'
@@ -65,7 +65,27 @@ layui.use('table', function(){
     //监听操作栏事件
     table.on('tool(starInfoTable)', function(obj){
         var data = obj.data;
-        if(obj.event === 'edit'){
+        if(obj.event === 'del'){
+            layer.confirm('确认删除吗？注意：数据无法恢复', function (index) {
+                $.ajax({
+                    url: ctx + "/commonDelete/starInfo?id=" + data.id,
+                    type: "get",
+                    success: function (data) {
+                        if (data.success) {
+                            layer.msg("删除成功");
+                            obj.del();
+                        } else {
+                            layer.msg(data.msg, {icon: 2, time: 2000}, function () {
+                            });
+                        }
+                    },
+                    error:function (data) {
+                        layer.msg("无法删除，请联系管理员！");
+                    }
+                });
+                layer.close(index);
+            });
+        } else if(obj.event === 'edit'){
             layer.open({
                 type: 2,
                 title: "编辑资源信息",
