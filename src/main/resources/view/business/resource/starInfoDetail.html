@@ -25,6 +25,12 @@
                 <input type="text" name="price" lay-verify="required|number" lay-reqtext="报价为必填项" autocomplete="off" class="layui-input">
             </div>
         </div>
+        <div class="layui-inline">
+            <label class="layui-form-label">报价更新时间</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" name="priupdateTime" id="priupdateTime" placeholder="yyyy-MM-dd HH:mm:ss">
+            </div>
+        </div>
     </div>
 
     <div class="layui-form-item">
@@ -71,29 +77,9 @@
             </div>
         </div>
         <div class="layui-inline">
-            <label class="layui-form-label">笔记数量</label>
-            <div class="layui-input-inline">
-                <input type="text" name="noteCount" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-inline">
             <label class="layui-form-label">平均点赞数</label>
             <div class="layui-input-inline">
-                <input type="text" name="avgLike" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">平均收藏数</label>
-            <div class="layui-input-inline">
-                <input type="text" name="avgCollection" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-inline">
-            <label class="layui-form-label">平均评论数</label>
-            <div class="layui-input-inline">
-                <input type="text" name="avgComment" autocomplete="off" class="layui-input">
+                <input type="text" name="avgLike" lay-verify="required|number" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -134,8 +120,16 @@
 </body>
 
 <script>
-    layui.use(['form'], function(){
-        var form = layui.form,layer = layui.layer;
+    layui.use(['form','laydate'], function(){
+        var form = layui.form,
+            laydate = layui.laydate,
+            layer = layui.layer;
+
+        //日期时间选择器
+        laydate.render({
+            elem: '#priupdateTime'
+            ,type: 'datetime'
+        });
 
         //监听提交
         form.on('submit(addStarInfo)', function(data){

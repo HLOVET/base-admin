@@ -249,9 +249,12 @@ CREATE TABLE `tb_star_info`  (
                                  `avg_comment` int NULL DEFAULT NULL COMMENT '平均评论',
                                  `content_sharp` int NULL DEFAULT NULL COMMENT '内容形式(1-图文  2-视频)',
                                  `price` int NULL DEFAULT NULL COMMENT '报价',
+                                 `priupdate_time` datetime NULL DEFAULT NULL COMMENT '报价更新时间',
                                  `account_level` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '分为 S A B C',
                                  `owner_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所属人员',
                                  `contact` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系方式',
+                                 `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+                                 `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
                                  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 

@@ -20,6 +20,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -51,6 +52,8 @@ public class StarInfoServiceImpl extends ServiceImpl<StarInfoMapper, StarInfo> i
         StarInfo starInfo = new StarInfo();
         BeanUtils.copyProperties(starInfoReq, starInfo);
         starInfo.setId(UUIDUtil.getUUID());
+        starInfo.setCreateTime(LocalDateTime.now());
+        starInfo.setUpdateTime(LocalDateTime.now());
         return starInfoMapper.insert(starInfo);
     }
 
@@ -58,6 +61,7 @@ public class StarInfoServiceImpl extends ServiceImpl<StarInfoMapper, StarInfo> i
     public int update(StarInfoReq starInfoReq) {
         StarInfo starInfo = new StarInfo();
         BeanUtils.copyProperties(starInfoReq, starInfo);
+        starInfo.setUpdateTime(LocalDateTime.now());
         return starInfoMapper.updateById(starInfo);
     }
 
@@ -76,6 +80,8 @@ public class StarInfoServiceImpl extends ServiceImpl<StarInfoMapper, StarInfo> i
     @Override
     public boolean batchImport(List<CSVRecord> recordList) {
         List<List<CSVRecord>> partListData = Lists.partition(recordList,30);
+
+        LocalDateTime createTime = LocalDateTime.now();
 
         partListData.forEach(partList -> {
             //导入的昵称集合 有重复的情况只会导入最后一个
@@ -103,12 +109,15 @@ public class StarInfoServiceImpl extends ServiceImpl<StarInfoMapper, StarInfo> i
                 starInfo.setNoteCount(Integer.parseInt(lineData.get("笔记数量")));
                 starInfo.setLikeCount(Integer.parseInt(lineData.get("点赞收藏总量")));
                 starInfo.setAvgLike(Integer.parseInt(lineData.get("平均点赞")));
-                starInfo.setAvgCollection(Integer.parseInt(lineData.get("平均收藏")));
-                starInfo.setAvgComment(Integer.parseInt(lineData.get("平均评论")));
-                starInfo.setContentSharp(Integer.parseInt(lineData.get("内容形式(1-图文  2-视频)")));
+                starInfo.setContentSharp(Integer.parseInt(lineData.get("内容形式")));
+//                starInfo.setAvgCollection(Integer.parseInt(lineData.get("平均收藏")));
+//                starInfo.setAvgComment(Integer.parseInt(lineData.get("平均评论")));
                 starInfo.setPrice(Integer.parseInt(lineData.get("报价(要求整数)")));
-                starInfo.setAccountLevel(lineData.get("账号等级(分为 S A B C)"));
+                starInfo.setAccountLevel(lineData.get("账号等级"));
                 starInfo.setOwnerName(lineData.get("所属人员"));
+                starInfo.setContact(lineData.get("联系方式"));
+                starInfo.setCreateTime(createTime);
+                starInfo.setUpdateTime(createTime);
                 return starInfo;
             }).collect(Collectors.toList());
             //分批次新增

@@ -13,7 +13,9 @@ import com.yaraculture.resource.common.pojo.PageInfo;
 import com.yaraculture.resource.common.pojo.PageResult;
 import com.yaraculture.resource.common.pojo.Result;
 import com.yaraculture.resource.util.CsvImportUtil;
+import com.yaraculture.resource.util.DateUtil;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -48,7 +50,10 @@ public class StarInfoController {
         if (starInfo == null){
             throw BizException.build(ErrorCodeEnum.TARGET_NOT_EXSIT);
         }
-        return new ModelAndView("business/resource/starInfoDetailEdit","editStarInfo",starInfo);
+        StarInfoVo starInfoVo = new StarInfoVo();
+        BeanUtils.copyProperties(starInfo, starInfoVo);
+        starInfoVo.setPriupdateTimeStr(DateUtil.formatWithoutT(starInfo.getPriupdateTime()));
+        return new ModelAndView("business/resource/starInfoDetailEdit","editStarInfo",starInfoVo);
     }
 
     @GetMapping("/pageList/init")
@@ -88,8 +93,8 @@ public class StarInfoController {
         // 使用CSV工具类，生成file文件
         File csvFile = CsvImportUtil.uploadFile(file);
 
-        String[] FILE_HEADER = {"达人昵称","个人主页链接","账户标签(多个时用 | 分隔)","粉丝数量","笔记数量","点赞收藏总量","平均点赞","平均收藏",
-                "平均评论","内容形式(1-图文  2-视频)","报价(要求整数)","账号等级(分为 S A B C)","所属人员"};
+        String[] FILE_HEADER = {"达人昵称","个人主页链接","账户标签(多个时用 | 分隔)","粉丝数量","笔记数量","点赞收藏总量","平均点赞"
+                ,"内容形式","报价(要求整数)","账号等级","所属人员","联系方式"};
         List<CSVRecord> csvRecordList = CsvImportUtil.readCSV(csvFile, FILE_HEADER);
         if (csvRecordList.size() > 100){
             throw BizException.build(ErrorCodeEnum.IMPORT_FILE_OVERSIZE);

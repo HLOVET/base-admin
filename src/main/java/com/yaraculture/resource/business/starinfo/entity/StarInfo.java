@@ -1,9 +1,11 @@
 package com.yaraculture.resource.business.starinfo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -71,7 +73,10 @@ public class StarInfo implements Serializable {
      * 报价(“万”为单位)
      */
     private Integer price;
-
+    /**
+     * 报价更新时间
+     */
+    private LocalDateTime priupdateTime;
     /**
      * 分为 S A B C
      */
@@ -91,5 +96,13 @@ public class StarInfo implements Serializable {
      * 联系方式
      */
     private String contact;
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
 
+    /**
+     * 更新时间
+     */
+    private LocalDateTime updateTime;
 }

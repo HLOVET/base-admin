@@ -1,7 +1,10 @@
 package com.yaraculture.resource.business.models.vo;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 
 @Data
@@ -29,7 +32,7 @@ public class StarInfoVo {
     /**
      * 笔记数量
      */
-    private Integer noteCount;
+//    private Integer noteCount;
 
     /**
      * 点赞收藏总量“万”
@@ -44,12 +47,12 @@ public class StarInfoVo {
     /**
      * 收藏平均数
      */
-    private Integer avgCollection;
+//    private Integer avgCollection;
 
     /**
      * 评论平均数
      */
-    private Integer avgComment;
+//    private Integer avgComment;
 
     /**
      * 内容形式(1-图文  2-视频)
@@ -60,6 +63,17 @@ public class StarInfoVo {
      * 报价(“万”为单位)
      */
     private Integer price;
+
+    /**
+     * 报价更新时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime priupdateTime;
+
+    /**
+     * 报价更新时间str
+     */
+    private String priupdateTimeStr;
 
     /**
      * 分为 S A B C
@@ -80,4 +94,9 @@ public class StarInfoVo {
      */
     private String contact;
 
+    /**
+     * 更新时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updateTime;
 }

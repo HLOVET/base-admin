@@ -33,17 +33,19 @@ layui.use('table', function(){
         ,{field:'personUrl', title: '个人主页', templet: '<div><a href="{{d.personUrl}}" target="view_window" class="layui-table-link">{{d.personUrl}}</a></div>' }
         ,{field:'accountLabel',  title: '标签'}
         ,{field:'fansCount',  title: '粉丝数量', sort: true}
-        ,{field:'noteCount', title: '笔记数量'}
+        // ,{field:'noteCount', title: '笔记数量'}
         ,{field:'likeCount', title: '点赞收藏总量', sort: true}
         ,{field:'avgLike', title: '平均点赞', sort: true}
-        ,{field:'avgCollection', title: '平均收藏',sort: true}
-        ,{field:'avgComment', title: '平均评论', sort: true}
+        // ,{field:'avgCollection', title: '平均收藏',sort: true}
+        // ,{field:'avgComment', title: '平均评论', sort: true}
         ,{field:'contentSharp', title: '内容形式'}
         ,{field:'price', title: '报价', sort: true}
+        ,{field:'priupdateTime', title: '报价更新时间', minWidth: 170}
         ,{field:'accountLevel', title: '账号等级'}
         ,{field:'ownerName', title: '所属人'}
         ,{field:'contact', title: '联系方式'}
-        ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth: 170},
+        ,{field:'updateTime', title: '更新时间', minWidth: 170}
+        ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth: 40},
             {field:'id', title: 'id',hide:true} //id列隐藏
         ]]
         ,page:true

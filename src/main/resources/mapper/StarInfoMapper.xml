@@ -15,16 +15,19 @@
         <result column="avg_comment" property="avgComment" />
         <result column="content_sharp" property="contentSharp" />
         <result column="price" property="price" />
+        <result column="priupdate_time" property="priupdateTime" />
         <result column="account_level" property="accountLevel" />
         <result column="person_url" property="personUrl" />
         <result column="owner_name" property="ownerName" />
         <result column="contact" property="contact" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_time" property="createTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, account_label, nick_name, fans_count, note_count, like_count,
-        avg_like, avg_collection, avg_comment, content_sharp, price, account_level, person_url, owner_name,contact
+        avg_like, avg_collection, avg_comment, content_sharp, price, account_level, person_url, owner_name,contact,create_time,update_time,priupdate_time
     </sql>
 
 

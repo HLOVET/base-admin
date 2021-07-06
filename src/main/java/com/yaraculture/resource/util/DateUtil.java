@@ -1,6 +1,8 @@
 package com.yaraculture.resource.util;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -123,4 +125,18 @@ public class DateUtil {
         String mMdd = new SimpleDateFormat("MMdd").format(date);
         return "0101".equals(mMdd) || "0401".equals(mMdd) || "0701".equals(mMdd) || "1001".equals(mMdd);
     }
+
+    /**
+     * 修改前 2021-07-06T17:05:40
+     * 修改后 2021-07-06 17:05:40
+     */
+    public static String formatWithoutT(LocalDateTime localDateTime){
+        if (localDateTime == null){
+            return null;
+        }
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return localDateTime.format(fmt);
+    }
+
+
 }
