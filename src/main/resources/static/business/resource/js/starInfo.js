@@ -79,31 +79,42 @@ layui.use('table', function(){
         }
     });
 
-    //这里以搜索为例 表格数据重载
-    var $ = layui.$, active = {
-        reload: function(){
-            var accountType = $('#accountType');
-            var nickName = $('#nickName');
-            var ownerName = $('#ownerName');
-            var accountLevel = $('#accountLevel');
-            //执行重载
-            table.reload('starInfoTable', {
-                page: {
-                    curr: 1 //重新从第 1 页开始
-                }
-                ,where: {
-                    accountLabel: accountType.val(),
-                    nickName: nickName.val(),
-                    accountLevel: accountLevel.val(),
-                    ownerName: ownerName.val()
-                }
-            });
-        }
-    };
     //搜索按钮 重载表格
     $('#searchBtn').on('click', function(){
-        var type = $(this).data('type');
-        active[type] ? active[type].call(this) : '';
+        // var type = $(this).data('type');
+        // active[type] ? active[type].call(this) : '';
+        tableIns.reload({
+            where: { //设定异步数据接口的额外参数，任意设
+                accountLabel: $('#accountType').val(),
+                nickName: $('#nickName').val(),
+                ownerName: $('#ownerName').val(),
+                accountLevel: $('#accountLevel').val()
+            }
+            ,page: {
+                curr: 1 //重新从第 1 页开始
+            }
+        }); //只重载数据
+
+        //未了解决点击 搜索 后上传按钮无响应问题（原因未明）
+        upload.render({
+            elem: '#batchUpload' //绑定元素
+            ,url: '/starInfo/importFile' //上传接口
+            ,done: function(res){
+                console.log('import suss='+JSON.stringify(res));
+                if (res.success){
+                    layer.msg("导入成功！！！！！！");
+                }else {
+                    layer.msg("导入失败~~，"+res.msg);
+                }
+                //上传完毕回调
+            }
+            ,error: function(){
+                layer.msg("导入失败了.. 0.0");
+                console.log('import error='+JSON.stringify(res));
+                //请求异常回调
+            }
+        });
+
     });
 
     //重置搜索条件
@@ -111,14 +122,14 @@ layui.use('table', function(){
         $("#searchDiv :input").val("");
     });
 
-    //批量上传执行实例
+    //批量上传执行实例 （页面初始化时一次）
     var uploadInst = upload.render({
         elem: '#batchUpload' //绑定元素
         ,url: '/starInfo/importFile' //上传接口
         ,done: function(res){
             console.log('import suss='+JSON.stringify(res));
             if (res.success){
-                layer.msg("导入成功！");
+                layer.msg("导入成功！！！！！！");
             }else {
                 layer.msg("导入失败~~，"+res.msg);
             }
