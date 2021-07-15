@@ -56,7 +56,7 @@ public class CsvImportUtil {
     public static List<CSVRecord> readCSV(File filePath, String[] fileHeader) {
             CSVFormat format = CSVFormat.DEFAULT.withHeader(fileHeader).withSkipHeaderRecord();
             // 这是从上面写入的文件中读出数据的代码
-            try(BufferedReader in =new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"UTF-8"));) {
+            try(BufferedReader in =new BufferedReader(new InputStreamReader(new FileInputStream(filePath),"GB2312"));) {
                 CSVParser csvParser = format.parse(in);
                 return csvParser.getRecords();
 //                Iterable<CSVRecord> records = format.parse(in);

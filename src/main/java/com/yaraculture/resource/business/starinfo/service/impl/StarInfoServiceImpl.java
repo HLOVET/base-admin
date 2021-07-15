@@ -106,7 +106,7 @@ public class StarInfoServiceImpl extends ServiceImpl<StarInfoMapper, StarInfo> i
                 starInfo.setPersonUrl(lineData.get("个人主页链接"));
                 starInfo.setAccountLabel(lineData.get("账户标签(多个时用 | 分隔)"));
                 starInfo.setFansCount(Integer.parseInt(lineData.get("粉丝数量")));
-                starInfo.setNoteCount(Integer.parseInt(lineData.get("笔记数量")));
+//                starInfo.setNoteCount(Integer.parseInt(lineData.get("笔记数量")));
                 starInfo.setLikeCount(Integer.parseInt(lineData.get("点赞收藏总量")));
                 starInfo.setAvgLike(Integer.parseInt(lineData.get("平均点赞")));
                 starInfo.setContentSharp(Integer.parseInt(lineData.get("内容形式")));

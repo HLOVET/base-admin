@@ -93,7 +93,7 @@ public class StarInfoController {
         // 使用CSV工具类，生成file文件
         File csvFile = CsvImportUtil.uploadFile(file);
 
-        String[] FILE_HEADER = {"达人昵称","个人主页链接","账户标签(多个时用 | 分隔)","粉丝数量","笔记数量","点赞收藏总量","平均点赞"
+        String[] FILE_HEADER = {"达人昵称","个人主页链接","账户标签(多个时用 | 分隔)","粉丝数量","点赞收藏总量","平均点赞"
                 ,"内容形式","报价(要求整数)","账号等级","所属人员","联系方式"};
         List<CSVRecord> csvRecordList = CsvImportUtil.readCSV(csvFile, FILE_HEADER);
         if (csvRecordList.size() > 100){
