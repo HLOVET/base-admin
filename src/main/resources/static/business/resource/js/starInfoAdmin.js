@@ -40,11 +40,12 @@ layui.use('table', function(){
         // ,{field:'avgComment', title: '平均评论', sort: true}
         ,{field:'contentSharp', title: '内容形式'}
         ,{field:'price', title: '报价', sort: true}
-        ,{field:'priupdateTime', title: '报价更新时间', minWidth: 170}
+            <!-- update 2021-11-15 辉总觉得没啥用 先去掉 -->
+        // ,{field:'priupdateTime', title: '报价更新时间', minWidth: 170}
         ,{field:'accountLevel', title: '账号等级'}
         ,{field:'ownerName', title: '所属人'}
         ,{field:'contact', title: '联系方式'}
-        ,{field:'updateTime', title: '更新时间', minWidth: 170}
+        ,{field:'updateTime', title: '更新时间', minWidth: 170,sort: true}
         ,{fixed: 'right', title:'操作', toolbar: '#barDemo', minWidth: 40},
             {field:'id', title: 'id',hide:true} //id列隐藏
         ]]
@@ -94,7 +95,7 @@ layui.use('table', function(){
                 shadeClose: false,
                 share: 0.01,
                 area: ['1100px', '600px'],
-                content: "/starInfo/getEditPage?dataId=" + data.id,
+                content: "/starInfo/getAdminEditPage?dataId=" + data.id,
             });
         }
     });

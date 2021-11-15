@@ -55,6 +55,18 @@ public class StarInfoController {
         starInfoVo.setPriupdateTimeStr(DateUtil.formatWithoutT(starInfo.getPriupdateTime()));
         return new ModelAndView("business/resource/starInfoDetailEdit","editStarInfo",starInfoVo);
     }
+    //管理员修改
+    @GetMapping("/getAdminEditPage")
+    public ModelAndView getAdminEditPage(String dataId) {
+        StarInfo starInfo =  starInfoService.getById(dataId);
+        if (starInfo == null){
+            throw BizException.build(ErrorCodeEnum.TARGET_NOT_EXSIT);
+        }
+        StarInfoVo starInfoVo = new StarInfoVo();
+        BeanUtils.copyProperties(starInfo, starInfoVo);
+        starInfoVo.setPriupdateTimeStr(DateUtil.formatWithoutT(starInfo.getPriupdateTime()));
+        return new ModelAndView("business/resource/starInfoDetailAdminEdit","editStarInfo",starInfoVo);
+    }
 
     @GetMapping("/pageList/init")
     public ModelAndView pageList() {
